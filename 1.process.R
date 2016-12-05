@@ -58,6 +58,9 @@ df[df$county.name == 'dade' & df$state.fips.character == '12', ]$county.name <- 
 county.regions[county.regions$county.fips.character == '29510', ]$county.name <- 'st. louis city'
 county.regions[county.regions$county.fips.character == '24510', ]$county.name <- 'baltimore city'
 
+df[df$county.name == 'shannon' & df$state.fips.character == '46', ]$county.name <- 'oglala lakota'
+county.regions[county.regions$county.fips.character == '46113', ]$county.name <- 'oglala lakota'
+
 df %<>% inner_join(county.regions) %>% 
   group_by(county.fips.character) %>%
   # Number of elections each county was observed in

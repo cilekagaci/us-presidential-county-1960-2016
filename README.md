@@ -40,12 +40,13 @@ Let's order all the counties according to the percent of vote the Democratic par
 | Maryland             | Prince George's      |           88.1|
 | Mississippi          | Claiborne            |           86.8|
 | Mississippi          | Jefferson            |           86.5|
+| South Dakota         | Oglala Lakota        |           86.5|
 
 which contains 4 counties from the top-5 list of the 2012 elections:
 
 | State                | County               |  Dem. Vote (%)|
 |:---------------------|:---------------------|--------------:|
-| South Dakota         | Shannon              |           93.4|
+| South Dakota         | Oglala Lakota        |           93.4|
 | New York             | Bronx                |           91.4|
 | District of Columbia | District of Columbia |           90.9|
 | Maryland             | Prince George's      |           89.7|
