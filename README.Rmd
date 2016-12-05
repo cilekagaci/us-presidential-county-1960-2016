@@ -10,7 +10,7 @@ output:
 
 This repository contains county-level presidential election results in the US for the elections held between 1960 and 2016 (15 elections). The data is taken from [Dave Leip's Atlas of U.S. Presidential Elections](http://uselectionatlas.org/).
 
-The main file you want to use is [data/processed/us-presidential-counties-1960-2016.tsv](https://github.com/cilekagaci/us-presidential-county-1960-2016/blob/master/data/processed/us-presidential-counties-1960-2016.tsv). It's a tab-separated file that contains one line per county, election year, party triplet. The column names are descriptive enough. If you need the details have a look a the [codebook](https://github.com/cilekagaci/us-presidential-county-1960-2016/blob/master/codebook.txt).
+The main file you want to use is [data/processed/us-presidential-counties-1960-2016.tsv](data/processed/us-presidential-counties-1960-2016.tsv). It's a tab-separated file that contains one line per county, election year, party triplet. The column names are descriptive enough. If you need the details have a look a the [codebook](codebook.txt).
 
 The code that scrapes the raw data and produced the aboce tsv file is included to help other researchers verify and replicate the data collection and generation process. If you find any issues and bugs either let us know or send pull requests. Also included is an example RMarkdown file which produces this README and demonstrates some very preliminary analysis we have done on the data.
 
