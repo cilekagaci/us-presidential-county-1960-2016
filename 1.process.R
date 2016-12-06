@@ -69,7 +69,7 @@ ma_me_2016 = ma_me_2016_raw%>%
   ungroup %>%
   transmute(county.name, candidate.name, vote.percent, vote.count, state.fips.character, year)
 
-df = bind_rows(df %>% filter(!(state.fips.character %in% c('23', '25'))), ma_me_2016)
+df = bind_rows(df %>% filter(year < 2008 | !(state.fips.character %in% c('23', '25'))), ma_me_2016)
 
 # Fix non-matching names for three large cities.
 df[df$county.name == 'dade' & df$state.fips.character == '12', ]$county.name <- 'miami-dade'

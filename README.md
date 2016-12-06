@@ -14,7 +14,7 @@ Introduction
 
 This repository contains county-level presidential election results in the US for the elections held between 1960 and 2016 (15 elections). The data is taken from [Dave Leip's Atlas of U.S. Presidential Elections](http://uselectionatlas.org/).
 
-The main file you want to use is [data/processed/us-presidential-counties-1960-2016.tsv](data/processed/us-presidential-counties-1960-2016.tsv). It's a tab-separated file that contains one line per county, election year, party triplet. The column names are descriptive enough. If you need the details have a look at the [codebook](codebook.txt).
+The main file you want to use is [data/processed/us-presidential-counties-1960-2016.tsv](data/processed/us-presidential-counties-1960-2016.tsv). It's a tab-separated file that contains one line per county, election year, party triplet. The column names are descriptive enough. If you need the details have a look at the [codebook](codebook.txt). The full dataset (with non-matching counties and including problematic states such as Alaska and Virginia) is [data/processed/full-us-presidential-counties-1960-2016.tsv](here).
 
 The code that scrapes the raw data and produces the above tsv file is included to help other researchers verify and replicate the data collection and generation process. If you find any issues and bugs either let us know or send pull requests. Also included is an example RMarkdown file which produces this README and demonstrates some very preliminary analysis we have done on the data.
 
@@ -25,7 +25,7 @@ County-level data for Maine and Massachusetts in 2016 comes from [tonmcg's GitHu
 
 Some of the election results in Alaska were given in districts. Since we are unable to map the districts and other boroughs in Alaska reliable we decided to remove all data points from Alaska. They are still present in the raw files, but not in the final tsv.
 
-Similarly, the counties and independent towns county status in the Commonwealth of Virginia have changes a lot in the last 50 years. Therefore it is not feasible to link different counties over elections and geographical units with the same names may refer to very different areas and populations. We decdided to remove Virginia from the dataset the same way we did for Alaska.
+Similarly, the counties and independent towns county status in the Commonwealth of Virginia have changes a lot in the last 50 years. Therefore it is not feasible to link different counties over elections and geographical units with the same names may refer to very different areas and populations. We decided to remove Virginia from the dataset the same way we did for Alaska.
 
 Examples
 ========
