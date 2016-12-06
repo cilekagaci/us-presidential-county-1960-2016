@@ -16,7 +16,7 @@ The code that scrapes the raw data and produces the above tsv file is included t
 
 # Caveats and Missing Data
 
-2016 elections do not contain Massachusetts or Maine. 
+County-level data for Maine and Massachusetts in 2016 comes from [tonmcg's GitHub repository](https://github.com/tonmcg/County_Level_Election_Results_12-16)
 
 Some of the election results in Alaska were given in districts. Since we are unable to map the districts and other boroughs in Alaska reliable we decided to remove all data points from Alaska. They are still present in the raw files, but not in the final tsv.
 

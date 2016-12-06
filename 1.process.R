@@ -51,8 +51,28 @@ df = do.call(rbind, years) %>%
   mutate(county.name = new.county.name) %>%
   select(-new.county.name)
 
-
 data(county.regions)  # From the package choroplethrMaps
+
+# For 2016, use ME and MA from 
+ma_me_2016_raw <- read_csv('https://github.com/tonmcg/County_Level_Election_Results_12-16/raw/master/US_County_Level_Presidential_Results_08-16.csv') 
+ma_me_2016 = ma_me_2016_raw%>%
+  gather(key, vote.count, matches('_2008|_2012|_2016')) %>%
+  tidyr::extract(key, into = c('party', 'year'), '^([[:alnum:]]*)_([0-9]+)', convert = TRUE) %>%
+  filter(party != 'total') %>%
+  filter(grepl('^(23|25)', fips_code)) %>%
+  transmute(candidate.name = ifelse(party == 'dem', 'Clinton',
+                           ifelse(party == 'gop', 'Trump', 'Other')),
+            county.fips = fips_code,
+            year,
+            vote.count) %>%
+  group_by(year, county.fips) %>%
+  mutate(vote.percent = 100 * vote.count / sum(vote.count)) %>%
+  inner_join(county.regions, by = c("county.fips" = "county.fips.character")) %>%
+  ungroup %>%
+  transmute(county.name, candidate.name, vote.percent, vote.count, state.fips.character, year)
+
+df = bind_rows(df %>% filter(!(state.fips.character %in% c('23', '25'))), ma_me_2016)
+
 # Fix non-matching names for three large cities.
 df[df$county.name == 'dade' & df$state.fips.character == '12', ]$county.name <- 'miami-dade'
 county.regions[county.regions$county.fips.character == '29510', ]$county.name <- 'st. louis city'
