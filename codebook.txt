@@ -22,10 +22,10 @@ vote.count: Number of votes the party received in the county in the given year.
 
 county.total.count: Total number of votes received in the county (sum of D, R, and O rows for a given county and year).
 
-national.party.count: Total number of votes observed for the party in the election (this is not the official counts, but limited to the counties present in the dataset).
+national.party.count: Total number of votes observed for the party in the election.
 
 national.party.percent: Percentage of the national.party.count in the total number of votes.
 
-national.count: Total number of votes observed in a given year (this is not the official count, but limited to counties observed in the dataset).
+national.count: Total number of votes observed in a given year.
 
 is.national.winner: Is the candidate of the party the winner of the presidential race (might be different than the result of the popular vote).

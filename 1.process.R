@@ -41,8 +41,6 @@ for (year in seq(1960, 2016, 4)) {
 df = do.call(rbind, years) %>% 
   mutate(county.name = str_to_lower(county.name)) %>%
   rename(state.fips.character = state_fips) %>% 
-  # Filter out Virginia and Alaska, see details in the documentation.
-  filter(state.fips.character != '02', state.fips.character != '51') %>%
   group_by(state.fips.character, county.name, year, candidate.name) %>%
   # Independent cities and counties may have the same name. In these cases
   # the cities are given at the bottom of the page. Update name accordingly.
@@ -81,13 +79,11 @@ county.regions[county.regions$county.fips.character == '24510', ]$county.name <-
 df[df$county.name == 'shannon' & df$state.fips.character == '46', ]$county.name <- 'oglala lakota'
 county.regions[county.regions$county.fips.character == '46113', ]$county.name <- 'oglala lakota'
 
-df %<>% inner_join(county.regions) %>% 
+raw_df = df %>%
+  inner_join(county.regions) %>% 
   group_by(county.fips.character) %>%
   # Number of elections each county was observed in
   mutate(obs.count = n_distinct(year)) %>%
-  # Eliminate counties that are observed in less than 10 elections
-  filter(obs.count >= 10) %>%
-  ungroup %>%
   # Merges anything that's not Dem. or Rep. into 'other' category.
   mutate(party = ifelse(candidate.name %in% dems, 'D', 
                         ifelse(candidate.name %in% reps, 'R',
@@ -108,16 +104,15 @@ df %<>% inner_join(county.regions) %>%
   filter(county.total.count > 0) %>%
   ungroup
 
-
-national.totals <- df %>%
+national_totals <- raw_df %>%
   group_by(year, party) %>%
   summarise(national.party.count = sum(vote.count)) %>%
   group_by(year) %>%
   mutate(national.count = sum(national.party.count),
          national.party.percent = 100 * national.party.count / national.count)
 
-counties_1960_2016 <- df %>% 
-  inner_join(national.totals) %>%
+raw_counties_1960_2016 <- raw_df %>% 
+  inner_join(national_totals) %>%
   inner_join(elections) %>%
   transmute(year, 
             county.fips = county.fips.character, 
@@ -136,5 +131,12 @@ counties_1960_2016 <- df %>%
             national.count,
             is.national.winner = winning.party == party)
 
+counties_1960_2016 <- raw_counties_1960_2016 %>%
+  # Filter out Virginia and Alaska, see details in the documentation.
+  filter(state.fips != '02', state.fips != '51') %>%
+  # Eliminate counties that are observed in less than 10 elections
+  filter(election.count >= 10)
+  
 write_tsv(counties_1960_2016, path = 'data/processed/us-presidential-counties-1960-2016.tsv')
+write_tsv(raw_counties_1960_2016, path = 'data/processed/full-us-presidential-counties-1960-2016.tsv')
 
