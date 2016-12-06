@@ -14,7 +14,9 @@ The main file you want to use is [data/processed/us-presidential-counties-1960-2
 
 The code that scrapes the raw data and produces the above tsv file is included to help other researchers verify and replicate the data collection and generation process. If you find any issues and bugs either let us know or send pull requests. Also included is an example RMarkdown file which produces this README and demonstrates some very preliminary analysis we have done on the data.
 
-# Caveats
+# Caveats and Missing Data
+
+2016 elections do not contain Massachusetts or Maine. 
 
 Some of the election results in Alaska were given in districts. Since we are unable to map the districts and other boroughs in Alaska reliable we decided to remove all data points from Alaska. They are still present in the raw files, but not in the final tsv.
 
